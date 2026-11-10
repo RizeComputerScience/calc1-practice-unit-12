@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unit 12 Practice: Substitution and Net Change</title>
+<title>Unit 12 Practice</title>
 <meta name="description" content="Practice substitution, net change, average value and exponential growth and decay with feedback on each line of your work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2789,7 +2789,7 @@ var selfcheck = (function () {
    ==================================================================================== */
 
 /* ---------------- links ---------------- */
-var PAUL_C = 'https://tutorial.math.lamar.edu/Classes/CalcI/', PAUL_P = 'https://tutorial.math.lamar.edu/Problems/CalcI/';
+var PAUL_C = 'https://tutorial.math.lamar.edu/Classes/CalcI/';
 var OS = 'https://openstax.org/books/calculus-volume-1/pages/';
 function paulEx(page, title, ex) { return [PAUL_C + page + '.aspx', 'Paul’s Online Math Notes: ' + title + (ex ? ', ' + ex : '')]; }
 var T_SUB1 = paulEx('SubstitutionRuleIndefinite', 'Substitution Rule for Indefinite Integrals', 'Example 1');
@@ -3220,14 +3220,14 @@ function sectionHTML(s, n) {
   return sec(s.id, String(n + 1), s.title, s.lede) + col(ps.map(function (p) { return blk(p.id, function () { return problemHTML(p); }); }).join(''));
 }
 function backHTML() {
-  return sec('sec-back', '', 'Back to Paul', '') + prose('', [
-    'If one type of problem gave you trouble, rework the practice problems for it: Paul’s [Substitution Rule for Indefinite Integrals](' + PAUL_P + 'SubstitutionRuleIndefinite.aspx), [Substitution Rule for Definite Integrals](' + PAUL_P + 'SubstitutionRuleDefinite.aspx) or [Average Function Value](' + PAUL_P + 'AvgFcnValue.aspx), or the [OpenStax 5.4](' + T_NET[0] + ') and [OpenStax 6.8](' + T_EXP[0] + ') exercises in this unit’s guide.',
-    'Next, complete Problem Set 10, Parts 1 and 2. Unit 13, Practice Final and Review, comes after it.']);
+  return sec('sec-back', '', 'What Comes Next', '') + prose('', [
+    'If one kind of problem gave you trouble, find the example of that kind in Unit 12 Worked Examples, cover its solution, and work it by hand.',
+    'Next, complete the Unit 12 Problem Set.']);
 }
 function page() {
-  return header('Unit 12 Practice', SECTIONS_P.map(function (s) { return ['#' + s.id, s.nav]; }).concat([['#sec-back', 'Back to Paul']])) +
-    '<main id="top">' + hero({ kicker: 'Calculus I · Unit 12', title: 'Unit 12 Practice: Substitution and Net Change',
-      dek: 'Use this page after the Unit 12 reading and the practice problems. For each problem, choose the method, then type each line of the work. Each line is checked before the next one opens. Type a power with ⟦^⟧, as in ⟦x^2⟧ or ⟦x^(3/2)⟧, and put a whole top or bottom in parentheses, as in ⟦(x + 1)/(x − 2)⟧.' }) +
+  return header('Unit 12 Practice', SECTIONS_P.map(function (s) { return ['#' + s.id, s.nav]; }).concat([['#sec-back', 'Next']])) +
+    '<main id="top">' + hero({ kicker: 'Calculus I · Unit 12: Substitution and Net Change', title: 'Unit 12 Practice',
+      dek: 'Use this page after you read Unit 12: Substitution and Net Change and Unit 12 Worked Examples. For each problem, choose the method, then type each line of the work. Each line is checked before the next one opens. Type a power with ⟦^⟧, as in ⟦x^2⟧ or ⟦x^(3/2)⟧, and put a whole top or bottom in parentheses, as in ⟦(x + 1)/(x − 2)⟧.' }) +
     SECTIONS_P.map(sectionHTML).join('') + backHTML() + '</main>';
 }
 expose({ PROBLEMS: PROBLEMS, problemHTML: problemHTML, formProblem: formProblem, stepDone: stepDone });
