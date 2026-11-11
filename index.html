@@ -2798,6 +2798,10 @@ var T_DEFSUB = paulEx('SubstitutionRuleDefinite', 'Substitution Rule for Definit
 var T_NET = [OS + '5-4-integration-formulas-and-the-net-change-theorem', 'OpenStax Calculus Volume 1, 5.4: The Net Change Theorem'];
 var T_AVG = paulEx('AvgFcnValue', 'Average Function Value');
 var T_EXP = [OS + '6-8-exponential-growth-and-decay', 'OpenStax Calculus Volume 1, 6.8 Exponential Growth and Decay, Example 6.46'];
+/* More Practice (2026-11-10) */
+var T_SPLIT = paulEx('SubstitutionRuleIndefinitePtII', 'More Substitution Rule', 'Example 2');
+var T_CONT = paulEx('ComputingDefiniteIntegrals', 'Computing Definite Integrals', 'Example 1(c)');
+var T_GROW = [OS + '6-8-exponential-growth-and-decay', 'OpenStax Calculus Volume 1, 6.8 Exponential Growth and Decay, Example 6.42'];
 
 /* A differential row shows its dx or du after the input (the item's units), and also accepts the answer typed with it. */
 /* ---------------- the sections ---------------- */
@@ -2805,7 +2809,8 @@ var SECTIONS_P = [
   { id: 'sec-sub', title: 'Substitution', nav: 'Substitution', lede: 'These go with Paul’s [Substitution Rule for Indefinite Integrals](' + T_SUB1[0] + '), Examples 1 to 3.' },
   { id: 'sec-defsub', title: 'Substitution With Limits', nav: 'With Limits', lede: 'These go with Paul’s [Substitution Rule for Definite Integrals](' + T_DEFSUB[0] + '), Example 1, Solution 2, and Example 2.' },
   { id: 'sec-net', title: 'Net Change and Average Value', nav: 'Net Change', lede: 'These go with [OpenStax 5.4](' + T_NET[0] + '), The Net Change Theorem, and Paul’s [Average Function Value](' + T_AVG[0] + ').' },
-  { id: 'sec-exp', title: 'Exponential Growth and Decay', nav: 'Growth and Decay', lede: 'This goes with [OpenStax 6.8](' + T_EXP[0] + '), Examples 6.42 and 6.44 to 6.46.' }
+  { id: 'sec-exp', title: 'Exponential Growth and Decay', nav: 'Growth and Decay', lede: 'This goes with [OpenStax 6.8](' + T_EXP[0] + '), Examples 6.42 and 6.44 to 6.46.' },
+  { id: 'sec-more', title: 'More Practice (Only If You Want It)', nav: 'More', lede: 'Nothing in this section is required. If a kind of problem above took you more than one try, the problem of the same kind here gives you another go: Problems 9 to 12 for substitution, Problems 13 and 14 for definite integrals, Problems 15 and 16 for net change and average value, and Problem 17 for growth and decay. The Unit 12 Problem Set comes next either way.' }
 ];
 
 /* the functions the figures draw */
@@ -2814,6 +2819,10 @@ function u12r6(t) { return 6 * Math.sqrt(2 * t + 1); }
 function u12v7(t) { return t * t - 4 * t + 3; }
 var U12K = -Math.log(2) / 8;
 function u12y8(t) { return 300 * Math.exp(U12K * t); }
+function u12m5(x) { return x * Math.exp(4 - x * x); }
+function u12m6(x) { return (2 * x * x * x + x) / (x * x * x * x + x * x + 1) - x / (x * x - 4); }
+function u12m7(t) { return 6 * t * Math.pow(t * t + 1, 2); }
+function u12m9(t) { return Math.pow(2, t / 5); }
 
 /* ---------------- the problems ---------------- */
 var PROBLEMS = [
@@ -2871,7 +2880,7 @@ var PROBLEMS = [
         wrongs: [['-(1/3)cos(4 - x^3)', 'Two minus signs multiply here: the `−F{1}{3}` from `dd{u}` and the minus in `I{}{} sin u dd{u} = −cos u`. Their product is positive.'],
           [['(1/3)cos(u)', 'cos(u)/3', '(1/3)cos(u) + c'], 'Replace `u` with `4 − x^3`, so the answer is written in `x`.']],
         hints: ['Write `4 − x^3` in place of `u` in `F{1}{3} cos u`, then add `+ c`.'],
-        why: 'Check: the derivative of `F{1}{3} cos(4 − x^3)` is `F{1}{3}(−sin(4 − x^3))(−3x^2) = x^2 sin(4 − x^3)`.' }] },
+        why: 'Check: the derivative of `F{1}{3} cos(4 − x^3)` is `F{1}{3}(−sin(4 − x^3))(−3x^2)`, which is `x^2 sin(4 − x^3)`.' }] },
 
   /* 3. the top is the derivative of the bottom, up to a constant: a logarithm */
   { id: 'p3', sec: 'sec-sub', board: 'I{}{} F{t + 1}{t^2 + 2t + 6} dd{t}', v: 't', teach: T_SUB3,
@@ -3057,7 +3066,288 @@ var PROBLEMS = [
     graph: { x: [0, 30], y: [0, 320], ticks: { x: 8, y: 50 }, fns: [{ f: u12y8, domain: [0, 30] }],
       dots: [{ x: 8, y: 150, label: '(8, 150)', at: 'ne' }, { x: 16, y: 75, label: '(16, 75)', at: 'ne' }, { x: 24, y: 37.5, label: '(24, 37.5)', at: 'n' }],
       aria: 'The amount y = 300 e^(kt) in mg from t = 0 to 30 hours, falling from 300 and leveling toward 0. Points mark 150 mg at 8 hours, 75 mg at 16 hours and 37.5 mg at 24 hours.' },
-    after: 'The amount halves every 8 hours: 150 mg at 8 hours, 75 mg at 16 hours and 37.5 mg at 24 hours.' }
+    after: 'The amount halves every 8 hours: 150 mg at 8 hours, 75 mg at 16 hours and 37.5 mg at 24 hours.' },
+
+  /* ================= More Practice (optional), added 2026-11-10 by the clarity rebuild =================
+     From the practice twins removed from Unit 12 Worked Examples (plan/clarity-rebuild/twins/unit-12.md: 12.1, 12.2, 12.4,
+     12.5, 12.7, 12.9) and the value-add Paul problems (plan/clarity-rebuild/units/unit-12/value-add.md: Substitution Rule
+     for Indefinite Integrals 17, More Substitution Rule 5, Substitution Rule for Definite Integrals 8). Every key and wrong
+     answer: SPEC.md, "More Practice", and tests/check_math.py. */
+
+  /* 9. (twin 12.1) a trig function of an inside function, a constant to adjust */
+  { id: 'm1', sec: 'sec-more', board: 'I{}{} x sin(3x^2) dd{x}', teach: T_SUB1,
+    steps: [
+      { lead: 'Which choice of `u` works?', ok: 0, pick: [
+        ['`u = 3x^2`, the inside of the sine', 'Its derivative, `6x`, matches the `x` in front up to a constant.'],
+        ['`u = x`', 'Then `dd{u} = dd{x}`, and the sine still holds `3x^2`. Choose the function inside the sine.', ['#ex-p2', 'See Problem 2, a sine of an inside function']],
+        ['`u = sin(3x^2)`', 'Then `dd{u} = 6x cos(3x^2) dd{x}`, and there is no cosine in the integral. Choose the function inside the sine.']] },
+      { lead: 'Compute `dd{u}`.', ask: 'dd{u} =', ans: '6x', units: 'dx', also: ['6x dx', '6x*dx', 'du=6xdx', 'du=6x*dx'],
+        wrongs: [['2x', 'That is the derivative of `x^2`. The 3 stays: the derivative of `3x^2` is `3 · 2x = 6x`.'],
+          ['3x', 'Bring the exponent down and multiply: the derivative of `3x^2` is `2 · 3x = 6x`.']],
+        hints: ['`dd{u} = u′ dd{x}`. Differentiate `3x^2`.'] },
+      { lead: 'Solve for the piece of the integral that matches `dd{u}`.', ask: 'x dd{x} =', num: true, ans: '1/6', units: 'du', also: ['du/6', '(1/6)du', '1/6du'],
+        wrongs: [['6', 'That would make `6 dd{u} = 36x dd{x}`. Divide both sides of `dd{u} = 6x dd{x}` by 6 instead.', ['#ex-p1', 'See Problem 1, the same step']]],
+        hints: ['Divide both sides of `dd{u} = 6x dd{x}` by 6.'] },
+      { show: ['I{}{} x sin(3x^2) dd{x}', '= F{1}{6} I{}{} sin u dd{u}'] },
+      { lead: 'Integrate in `u`.', ask: 'F{1}{6} I{}{} sin u dd{u} =', ans: '-(1/6)cos(u)', v: 'u', upToC: true,
+        wrongs: [['(1/6)cos(u)', 'The derivative of `cos u` is `−sin u`, so `I{}{} sin u dd{u} = −cos u + c`. Keep the minus sign.'],
+          ['-cos(u)', 'Keep the `F{1}{6}` in front: `F{1}{6} · (−cos u)`.'],
+          ['-6cos(u)', 'The constant from `x dd{x} = F{1}{6} dd{u}` is `F{1}{6}`, not 6.']],
+        hints: ['`I{}{} sin u dd{u} = −cos u + c`. Multiply it by `F{1}{6}`.'] },
+      { lead: 'Replace `u` with `3x^2`. Include the constant.', ask: 'I{}{} x sin(3x^2) dd{x} =', ans: '-(1/6)cos(3x^2) + c', upToC: true, needC: true,
+        wrongs: [['(1/6)cos(3x^2)', 'Keep the minus sign from `I{}{} sin u dd{u} = −cos u + c`. Check by differentiating: `F{1}{6} cos(3x^2)` gives `−x sin(3x^2)`.'],
+          ['-cos(3x^2)', 'Keep the `F{1}{6}`. Check by differentiating: `−cos(3x^2)` gives `6x sin(3x^2)`, six times the integrand.'],
+          [['-(1/6)cos(u)', '-cos(u)/6', '-(1/6)cos(u) + c', '-cos(u)/6 + c'], 'Replace `u` with `3x^2`, so the answer is written in `x`.']],
+        hints: ['Write `3x^2` in place of `u` in `−F{1}{6} cos u`, then add `+ c`.'],
+        why: 'Check: the derivative of `−F{1}{6} cos(3x^2)` is `−F{1}{6}(−sin(3x^2))(6x) = x sin(3x^2)`.' }] },
+
+  /* 10. (Paul, Substitution Rule for Indefinite Integrals, Problem 17(a) and (b)) the same u, a logarithm or a power */
+  { id: 'm2', sec: 'sec-more', task: 'Both integrals use the same `u`. Watch which antiderivative each one needs at the end.', board: ['"(a)" I{}{} F{3x}{1 + 9x^2} dd{x}', '"(b)" I{}{} F{3x}{(1 + 9x^2)^4} dd{x}'], teach: T_SUB3,
+    steps: [
+      { lead: 'Which choice of `u` works for both?', ok: 0, pick: [
+        ['`u = 1 + 9x^2`', 'Its derivative, `18x`, matches the `3x` on top up to a constant.'],
+        ['`u = 3x`, the top', 'Then `dd{u} = 3 dd{x}`, and the bottom is still written in `x`. Choose the function whose derivative is on top.'],
+        ['`u = (1 + 9x^2)^4`', 'That fits (b) only, and its derivative, `72x(1 + 9x^2)^3`, is not on top. Choose the function inside the power.']] },
+      { lead: 'Compute `dd{u}`.', ask: 'dd{u} =', ans: '18x', units: 'dx', also: ['18x dx', '18x*dx', 'du=18xdx', 'du=18x*dx'],
+        wrongs: [['9x', 'Bring the exponent down and multiply: the derivative of `9x^2` is `2 · 9x = 18x`.'],
+          [['18x + 1', '1 + 18x'], 'The derivative of the constant 1 is 0.']],
+        hints: ['Differentiate `1 + 9x^2`.'] },
+      { lead: 'Solve for the piece on top, `3x dd{x}`.', ask: '3x dd{x} =', num: true, ans: '1/6', units: 'du', also: ['du/6', '(1/6)du', '1/6du'],
+        wrongs: [['6', 'Divide instead of multiplying: `x dd{x} = F{1}{18} dd{u}`, so `3x dd{x} = F{3}{18} dd{u}`.'],
+          ['1/18', 'That is `x dd{x}`. Multiply by 3 to get `3x dd{x}`.']],
+        hints: ['First `x dd{x} = F{1}{18} dd{u}`. Then multiply both sides by 3.'] },
+      { show: ['"(a)" = F{1}{6} I{}{} F{1}{u} dd{u}'] },
+      { lead: 'Integrate (a) in `u`.', ask: 'F{1}{6} I{}{} F{1}{u} dd{u} =', ans: '(1/6)ln|u|', v: 'u', upToC: true,
+        wrongs: [['ln|u|', 'Keep the `F{1}{6}` in front.'],
+          ['-1/(6u^2)', 'That is the derivative of `F{1}{6} · F{1}{u}`, not an antiderivative. `I{}{} F{1}{u} dd{u} = ln|u| + c`.'],
+          ['6ln|u|', 'The constant from `3x dd{x} = F{1}{6} dd{u}` is `F{1}{6}`, not 6.']],
+        hints: ['`I{}{} F{1}{u} dd{u} = ln|u| + c`.'] },
+      { lead: 'Replace `u` with `1 + 9x^2`. Include the constant.', ask: '"(a)" I{}{} F{3x}{1 + 9x^2} dd{x} =', ans: '(1/6)ln|1 + 9x^2| + c', upToC: true, needC: true,
+        wrongs: [['ln|1 + 9x^2|', 'Keep the `F{1}{6}`. Check by differentiating: `ln|1 + 9x^2|` gives `F{18x}{1 + 9x^2}`, six times the integrand.'],
+          [['(1/6)ln|u|', 'ln|u|/6', '(1/6)ln|u| + c', 'ln|u|/6 + c'], 'Replace `u` with `1 + 9x^2`, so the answer is written in `x`.']],
+        hints: ['Write `1 + 9x^2` in place of `u` in `F{1}{6} ln|u|`, then add `+ c`.'] },
+      { show: ['"(b)" = F{1}{6} I{}{} F{1}{u^4} dd{u} = F{1}{6} I{}{} u^(−4) dd{u}'] },
+      { lead: 'In (b) the bottom is `u^4`, not `u`. Which antiderivative do you use?', ok: 0, pick: [
+        ['The power rule: `I{}{} u^(−4) dd{u} = F{u^(−3)}{−3} + c`', 'A logarithm comes only from `F{1}{u}`, the power `−1`. Every other power takes the power rule.'],
+        ['A logarithm, because the integrand is a fraction: `ln|u^4|`', 'Only `F{1}{u}`, the power `−1`, gives a logarithm. Write `F{1}{u^4} = u^(−4)` and use the power rule.'],
+        ['The power rule: `I{}{} u^(−4) dd{u} = F{u^(−5)}{−5} + c`', 'The power rule adds 1 to the exponent: `−4 + 1 = −3`, not `−5`.']] },
+      { lead: 'Integrate (b) in `u`.', ask: 'F{1}{6} I{}{} u^(−4) dd{u} =', ans: '-1/(18u^3)', v: 'u', upToC: true,
+        wrongs: [['-1/(6u^3)', 'Divide by the whole new exponent, `−3`: `F{1}{6} · F{u^(−3)}{−3} = −F{1}{18u^3}`.'],
+          ['1/(18u^3)', 'Dividing by the new exponent, `−3`, makes the answer negative.'],
+          ['-1/(30u^5)', 'The power rule adds 1 to the exponent: `−4 + 1 = −3`, so the bottom is `18u^3`.'],
+          ['-2/(3u^5)', 'That is the derivative of `F{1}{6} u^(−4)`. Add 1 to the exponent instead.']],
+        hints: ['`I{}{} u^(−4) dd{u} = F{u^(−3)}{−3} + c`. Multiply it by `F{1}{6}`.'] },
+      { lead: 'Replace `u` with `1 + 9x^2`. Include the constant.', ask: '"(b)" I{}{} F{3x}{(1 + 9x^2)^4} dd{x} =', ans: '-1/(18(1 + 9x^2)^3) + c', upToC: true, needC: true,
+        wrongs: [['(1/6)ln|1 + 9x^2|', 'That is the answer to (a). In (b) the bottom is a fourth power, so the power rule applies, not the logarithm.'],
+          ['-1/(18(1 + 9x^2)^4)', 'After the power rule the exponent is `−3`, so the bottom holds `(1 + 9x^2)^3`.'],
+          [['-1/(18u^3)', '-1/(18u^3) + c', '-(1/18)u^(-3)', '-(1/18)u^(-3) + c'], 'Replace `u` with `1 + 9x^2`, so the answer is written in `x`.']],
+        hints: ['Write `1 + 9x^2` in place of `u` in `−F{1}{18u^3}`, then add `+ c`.'],
+        why: 'Check: the derivative of `−F{1}{18}(1 + 9x^2)^(−3)` is `F{3}{18}(1 + 9x^2)^(−4) · 18x = F{3x}{(1 + 9x^2)^4}`.' }] },
+
+  /* 11. (twin 12.2) two terms, two substitutions */
+  { id: 'm3', sec: 'sec-more', board: 'I{}{} (3x^2 e^(x^3) + F{4x}{x^2 + 5}) dd{x}', teach: T_SPLIT,
+    steps: [
+      { lead: 'The two terms have different inside functions. What do you do first?', ok: 0, pick: [
+        ['Split it into two integrals and give each its own substitution', 'An integral of a sum is the sum of the integrals, and each term then gets the `u` that fits it.'],
+        ['Use one `u = x^3` for the whole integrand', 'Then the second term, `F{4x}{x^2 + 5}`, is still written in `x`. Each term needs its own substitution.'],
+        ['Use `u = x^3 + x^2 + 5`, the two inside functions together', 'Its derivative, `3x^2 + 2x`, matches neither term. Split the integral and give each term its own `u`.']] },
+      { lead: 'In the first integral, let `u = x^3`. Then `dd{u} = 3x^2 dd{x}`, exactly the `3x^2 dd{x}` in the integral, so it becomes `I{}{} e^u dd{u}`. Integrate and write the result in `x`.', ask: 'I{}{} 3x^2 e^(x^3) dd{x} =', ans: 'e^(x^3)', upToC: true,
+        wrongs: [['(1/3)e^(x^3)', '`dd{u} = 3x^2 dd{x}` matches the integral exactly, so no constant is left over: `I{}{} e^u dd{u} = e^u`.'],
+          ['e^(x^3 + 1)/(x^3 + 1)', '`e^u` is not a power of `u`, so the power rule does not apply. Its antiderivative is `e^u` itself.']],
+        hints: ['`I{}{} e^u dd{u} = e^u + c`. Then write `x^3` in place of `u`.'] },
+      { lead: 'In the second integral, use a new letter: `w = x^2 + 5`, so `dd{w} = 2x dd{x}`. Solve for the piece `4x dd{x}`.', ask: '4x dd{x} =', num: true, ans: '2', units: 'dw', also: ['2dw', '2*dw'],
+        wrongs: [['1/2', 'That is `x dd{x}`. Multiply by 4 to get `4x dd{x}`.'],
+          ['8', 'Divide both sides of `dd{w} = 2x dd{x}` by 2 first: `x dd{x} = F{1}{2} dd{w}`, so `4x dd{x} = 2 dd{w}`.']],
+        hints: ['`x dd{x} = F{1}{2} dd{w}`. Multiply both sides by 4.'] },
+      { lead: 'So the second integral is `2 I{}{} F{1}{w} dd{w}`. Integrate and write the result in `x`.', ask: 'I{}{} F{4x}{x^2 + 5} dd{x} =', ans: '2ln|x^2 + 5|', upToC: true,
+        wrongs: [['ln|x^2 + 5|', 'Keep the 2 from `4x dd{x} = 2 dd{w}`.'],
+          ['4ln|x^2 + 5|', 'The constant comes from `4x dd{x} = 2 dd{w}`, so it is 2, not 4.']],
+        hints: ['`I{}{} F{1}{w} dd{w} = ln|w| + c`. Multiply it by 2, then write `x^2 + 5` in place of `w`.'] },
+      { lead: 'Add the two results. Include the constant.', ask: 'I{}{} (3x^2 e^(x^3) + F{4x}{x^2 + 5}) dd{x} =', ans: 'e^(x^3) + 2ln|x^2 + 5| + c', upToC: true, needC: true,
+        wrongs: [['e^(x^3) - 2ln|x^2 + 5|', 'The integrand is a sum, so add the two integrals.'],
+          ['e^(x^3) + ln|x^2 + 5|', 'Keep the 2 from the second integral: `2 ln|x^2 + 5|`.']],
+        hints: ['Write `e^(x^3) + 2 ln|x^2 + 5|`, then one `+ c` for both integrals.'],
+        why: '`x^2 + 5` is always positive, so `ln(x^2 + 5)` without the bars is the same answer. One `+ c` covers both integrals.' }] },
+
+  /* 12. (Paul, More Substitution Rule, Problem 5) split, then substitute only where it is needed */
+  { id: 'm4', sec: 'sec-more', board: 'I{}{} (e^z + F{4 sin(8z)}{1 + 9cos(8z)}) dd{z}', v: 'z', teach: T_SPLIT,
+    steps: [
+      { lead: 'Split the integral into two. Which of the two needs a substitution?', ok: 0, pick: [
+        ['Only the second: `I{}{} e^z dd{z} = e^z + c` already', 'The first term is a basic integral. The second has an inside function, `1 + 9cos(8z)`, whose derivative is on top up to a constant.'],
+        ['Both: use `u = z` for the first', '`u = z` changes nothing, because `e^z` is already its own antiderivative. Substitute only where an inside function needs it.'],
+        ['Only the first, because of the `e`', '`I{}{} e^z dd{z} = e^z + c` with no substitution. The second term is the one with an inside function.']] },
+      { lead: 'For the second integral, which choice of `u` works?', ok: 0, pick: [
+        ['`u = 1 + 9cos(8z)`, the bottom', 'Its derivative, `−72 sin(8z)`, matches the top up to a constant.'],
+        ['`u = sin(8z)`', 'Then `dd{u} = 8cos(8z) dd{z}`, and there is no `cos(8z)` on top to match it. Take the whole bottom as `u`.'],
+        ['`u = 4 sin(8z)`, the top', 'Then `dd{u} = 32cos(8z) dd{z}`, which is not in the integral. Take the bottom, whose derivative holds the sine.']] },
+      { lead: 'Compute `dd{u}`. Use the chain rule on `cos(8z)`.', ask: 'dd{u} =', ans: '-72sin(8z)', units: 'dz', also: ['-72sin(8z) dz', '-72sin(8z)*dz', 'du=-72sin(8z)dz', 'du=-72sin(8z)*dz'],
+        wrongs: [['72sin(8z)', 'The derivative of `cos` is `−sin`. Keep the minus sign.'],
+          ['-9sin(8z)', 'Chain rule: the 8 from inside `cos(8z)` multiplies too, `9 · (−sin(8z)) · 8 = −72 sin(8z)`.'],
+          ['-8sin(8z)', 'The 9 multiplies too: `9 · (−sin(8z)) · 8 = −72 sin(8z)`.']],
+        hints: ['The derivative of `cos(8z)` is `−sin(8z) · 8`. Multiply by the 9.'] },
+      { lead: 'Solve for the piece on top, `4 sin(8z) dd{z}`.', ask: '4 sin(8z) dd{z} =', num: true, ans: '-1/18', units: 'du', also: ['-du/18', '-(1/18)du', '-1/18du', '(-1/18)du'],
+        wrongs: [['1/18', 'Dividing by `−72` makes the constant negative.'],
+          ['-18', 'Divide instead of multiplying: `sin(8z) dd{z} = −F{1}{72} dd{u}`, so `4 sin(8z) dd{z} = −F{4}{72} dd{u}`.'],
+          ['-1/72', 'That is `sin(8z) dd{z}`. Multiply by 4 to get `4 sin(8z) dd{z}`.']],
+        hints: ['Divide both sides of `dd{u} = −72 sin(8z) dd{z}` by `−72`, then multiply by 4.'] },
+      { show: ['I{}{} F{4 sin(8z)}{1 + 9cos(8z)} dd{z}', '= −F{1}{18} I{}{} F{1}{u} dd{u}'] },
+      { lead: 'Integrate in `u`.', ask: '−F{1}{18} I{}{} F{1}{u} dd{u} =', ans: '-(1/18)ln|u|', v: 'u', upToC: true,
+        wrongs: [['(1/18)ln|u|', 'Keep the minus sign in front.'],
+          ['-ln|u|', 'Keep the `F{1}{18}` in front.'],
+          ['1/(18u^2)', 'That is the derivative of `−F{1}{18} · F{1}{u}`, not an antiderivative. `I{}{} F{1}{u} dd{u} = ln|u| + c`.']],
+        hints: ['`I{}{} F{1}{u} dd{u} = ln|u| + c`. Multiply it by `−F{1}{18}`.'] },
+      { lead: 'Replace `u`, add the first integral, and include the constant.', ask: 'I{}{} (e^z + F{4 sin(8z)}{1 + 9cos(8z)}) dd{z} =', ans: 'e^z - (1/18)ln|1 + 9cos(8z)| + c', upToC: true, needC: true,
+        wrongs: [['e^z + (1/18)ln|1 + 9cos(8z)|', 'Keep the minus sign from `4 sin(8z) dd{z} = −F{1}{18} dd{u}`.'],
+          ['-(1/18)ln|1 + 9cos(8z)|', 'Add the first integral, `I{}{} e^z dd{z} = e^z`.'],
+          [['e^z - (1/18)ln(1 + 9cos(8z))', 'e^z - (1/18)ln(1 + 9cos(8z)) + c', 'e^z - ln(1 + 9cos(8z))/18', 'e^z - ln(1 + 9cos(8z))/18 + c'], 'Keep the absolute value bars. `1 + 9cos(8z)` is negative whenever `cos(8z)` is below `−F{1}{9}`, and `I{}{} F{1}{u} dd{u} = ln|u| + c`.'],
+          [['e^z - (1/18)ln|u|', 'e^z - (1/18)ln|u| + c', 'e^z - ln|u|/18 + c'], 'Replace `u` with `1 + 9cos(8z)`, so the answer is written in `z`.']],
+        hints: ['Write `1 + 9cos(8z)` in place of `u` in `−F{1}{18} ln|u|`, put `e^z` in front, then add `+ c`.'],
+        why: 'Check: the derivative of `−F{1}{18} ln|1 + 9cos(8z)|` is `−F{1}{18} · F{−72 sin(8z)}{1 + 9cos(8z)}`, which is `F{4 sin(8z)}{1 + 9cos(8z)}`.' }] },
+
+  /* 13. (twin 12.4) e^u with the limits reversed */
+  { id: 'm5', sec: 'sec-more', task: 'Use `u = 4 − x^2`.', board: 'I{0}{2} x e^(4 − x^2) dd{x}', teach: T_DEFSUB,
+    steps: [
+      { lead: 'Compute `dd{u}`.', ask: 'dd{u} =', ans: '-2x', units: 'dx', also: ['-2x dx', '-2x*dx', 'du=-2xdx', 'du=-2x*dx'],
+        wrongs: [['2x', 'The derivative of `−x^2` is `−2x`. Keep the minus sign.'],
+          ['4 - 2x', 'The derivative of the constant 4 is 0.']],
+        hints: ['Differentiate `4 − x^2`.'] },
+      { lead: 'Solve for the piece `x dd{x}`.', ask: 'x dd{x} =', num: true, ans: '-1/2', units: 'du', also: ['-du/2', '-(1/2)du', '-1/2du', '(-1/2)du'],
+        wrongs: [['1/2', 'Divide both sides of `dd{u} = −2x dd{x}` by `−2`, so the constant is negative.'],
+          ['-2', 'Divide both sides by `−2` instead of multiplying.']],
+        hints: ['Divide both sides of `dd{u} = −2x dd{x}` by `−2`.'] },
+      { lead: 'Change the lower limit: put `x = 0` into `u = 4 − x^2`.', ask: 'u =', num: true, ans: '4', label: 'new lower limit',
+        wrongs: [['0', 'The new limit is a value of `u`, not `x`: `u = 4 − 0^2`.', ['#ex-p5', 'See Problem 5, the same step']]],
+        hints: ['`4 − 0^2`.'] },
+      { lead: 'Change the upper limit: put `x = 2` into `u = 4 − x^2`.', ask: 'u =', num: true, ans: '0', label: 'new upper limit',
+        wrongs: [['2', 'The limits must be values of `u` now. Put `x = 2` into `u = 4 − x^2`.'],
+          ['8', 'Subtract: `4 − 2^2 = 4 − 4`.']],
+        hints: ['`4 − 2^2`.'] },
+      { show: ['I{0}{2} x e^(4 − x^2) dd{x}', '= −F{1}{2} I{4}{0} e^u dd{u}'] },
+      { lead: 'Evaluate. Keep the limits in the order the substitution gives, 4 to 0.', ask: '−F{1}{2} I{4}{0} e^u dd{u} =', num: true, ans: '(e^4 - 1)/2', tol: 0.011,
+        wrongs: [['(1 - e^4)/2', 'Evaluate at the upper limit 0 first: `−F{1}{2}(e^0 − e^4) = F{1}{2}(e^4 − 1)`, which is positive.', ['#ex-p5', 'See Problem 5, limits from 4 to 0']],
+          ['e^4 - 1', 'Keep the `−F{1}{2}` from `x dd{x} = −F{1}{2} dd{u}`.'],
+          ['e^4/2', '`e^0 = 1`, not 0. Subtract it: `F{1}{2}(e^4 − 1)`.'],
+          ['(1 - e^2)/2', 'Those are the old limits, 0 and 2. After changing the limits, evaluate at `u = 4` and `u = 0`.']],
+        hints: ['An antiderivative of `e^u` is `e^u`. Compute `−F{1}{2}(e^0 − e^4)`, and remember `e^0 = 1`.'],
+        why: 'The exact value is `F{e^4 − 1}{2} ≈ 26.80`.' }],
+    graph: { x: [0, 2.2], y: [0, 25], ticks: { x: 0.5, y: 5 }, fns: [{ f: u12m5, domain: [0, 2.2] }], shade: [{ f: 0, a: 0, b: 2, role: 'outside' }],
+      aria: 'The graph of x times e to the (4 − x squared) from x = 0 to 2, rising to a peak of about 23 near x = 0.7 and falling to about 2 at x = 2. The region under it is shaded and lies entirely above the axis.' },
+    after: 'The integrand is positive on `[0, 2]`, so the answer, about 26.8, is positive, even though the `u`-limits run from 4 down to 0.' },
+
+  /* 14. (Paul, Substitution Rule for Definite Integrals, Problem 8) check the interval before integrating */
+  { id: 'm6', sec: 'sec-more', task: 'Before you integrate, check that the integrand has a value at every `x` from 1 to 5.', board: ['I{1}{5} f(x) dd{x}', 'f(x) = F{2x^3 + x}{x^4 + x^2 + 1} − F{x}{x^2 − 4}'], teach: T_CONT,
+    steps: [
+      { lead: 'The first fraction has the bottom `x^4 + x^2 + 1`. Can that bottom be 0?', ok: 0, pick: [
+        ['No: `x^4` and `x^2` are never negative, so the bottom is at least 1', 'So the first fraction has a value at every `x`.'],
+        ['Yes, at `x = 0`', 'At `x = 0` the bottom is `0 + 0 + 1 = 1`.'],
+        ['Yes, at `x = −1`', 'At `x = −1` the bottom is `1 + 1 + 1 = 3`. Even powers are never negative, so the bottom is at least 1.']] },
+      { lead: 'Where is the bottom of the second fraction, `x^2 − 4`, equal to 0? Type every `x`, separated by a comma.', ask: 'x =', list: true, num: true, ans: '2, -2',
+        wrongs: [[['4', '4, -4', '-4, 4'], '`x^2 − 4 = 0` means `x^2 = 4`. Take the square root: `x = 2` or `x = −2`.'],
+          [['0'], 'At `x = 0` the bottom is `0 − 4 = −4`, not 0. Solve `x^2 = 4`.']],
+        hints: ['Solve `x^2 = 4`. A square has two square roots.'] },
+      { lead: 'The integral runs from 1 to 5. What does `x = 2` mean for it?', ok: 0, pick: [
+        ['`f(2)` has no value, and 2 lies inside `[1, 5]`, so `f` is not continuous on `[1, 5]`', 'Only a break between the limits, or at a limit, matters. The other value, `−2`, lies outside `[1, 5]` and does no harm.'],
+        ['Nothing: only the limits 1 and 5 matter', 'The Fundamental Theorem of Calculus needs `f` continuous on the whole interval `[1, 5]`, not only at its ends. `x = 2` lies between 1 and 5.'],
+        ['Nothing: a substitution with new limits will remove the break', 'A substitution changes how the integral is written, not where the integrand has a value. The break at `x = 2` is still inside `[1, 5]`.']] },
+      { lead: 'So what can you say about `I{1}{5} f(x) dd{x}`?', ok: 0, pick: [
+        ['It cannot be evaluated with an antiderivative: the Fundamental Theorem of Calculus needs `f` continuous on `[1, 5]`', 'That is the whole answer. An antiderivative `F` exists on each side of 2, but `F(5) − F(1)` is not this integral.'],
+        ['Evaluate it anyway as `F(5) − F(1)`', 'That gives a number, but not this integral. `F(5) − F(1)` equals the integral only when `f` is continuous on `[1, 5]`, and `f` breaks at `x = 2`.'],
+        ['Split it at 2 into `I{1}{2} f(x) dd{x} + I{2}{5} f(x) dd{x}` and evaluate each', 'Splitting does not remove the break: `f(2)` still has no value, now at a limit of both pieces, and the Fundamental Theorem needs `f` continuous on each closed interval.']] }],
+    graph: { x: [0, 6], y: [-8, 8], ticks: { x: 1, y: 2 }, fns: [{ f: u12m6, domain: [0, 6], n: 800, breaks: [2] }], vlines: [{ x: 2, role: 'muted' }], bands: [{ x: [1, 5], role: 'inside' }],
+      aria: 'The graph of f from x = 0 to 6, with the interval from 1 to 5 tinted. Just left of x = 2 the graph rises off the top of the window, and just right of it the graph comes up from the bottom, on both sides of a dashed vertical line at x = 2.' },
+    after: 'The tinted strip is `[1, 5]`. Inside it, at `x = 2`, the graph runs off the window on both sides, so `f` is not continuous there.' },
+
+  /* 15. (twin 12.5) a leak rate: the net change in the volume, its sign, and what is left */
+  { id: 'm7', sec: 'sec-more', task: 'Oil leaks out of a tank at the rate `r(t) = 6t(t^2 + 1)^2` liters per hour, `t` hours after the leak starts. The tank holds 500 liters at `t = 0`.', board: 'r(t) = 6t(t^2 + 1)^2, 0 ≤ t ≤ 2', v: 't', teach: T_NET,
+    steps: [
+      { lead: 'Let `V(t)` be the volume of oil in the tank, in liters. Which is `V′(t)`?', ok: 0, pick: [
+        ['`V′(t) = −r(t)`, because the oil is leaving', 'The rate `r(t)` is how fast oil leaves, so the volume falls at that rate.'],
+        ['`V′(t) = r(t)`', '`r(t)` is how fast oil leaves. The volume falls, so its rate of change is negative: `V′(t) = −r(t)`.'],
+        ['`V′(t) = r′(t)`', '`r′(t)` is how fast the leak rate itself changes. The volume changes at the leak rate, with a minus sign.']] },
+      { lead: 'First find `I{0}{2} r(t) dd{t}`, the liters that leak out. Use `u = t^2 + 1`, so `dd{u} = 2t dd{t}`. Solve for the piece `6t dd{t}`.', ask: '6t dd{t} =', num: true, ans: '3', units: 'du',
+        wrongs: [['12', 'Divide both sides of `dd{u} = 2t dd{t}` by 2: `t dd{t} = F{1}{2} dd{u}`, so `6t dd{t} = 3 dd{u}`.'],
+          ['1/2', 'That is `t dd{t}`. Multiply by 6 to get `6t dd{t}`.']],
+        hints: ['`t dd{t} = F{1}{2} dd{u}`. Multiply both sides by 6.'] },
+      { lead: 'Change the limits: `t = 0` gives `u = 1`. What does `t = 2` give?', ask: 'u =', num: true, ans: '5', label: 'new upper limit',
+        wrongs: [['2', 'The limits must be values of `u` now. Put `t = 2` into `u = t^2 + 1`.'],
+          ['4', 'Add the 1: `2^2 + 1`.'],
+          ['3', 'Square the 2 first: `2^2 + 1 = 4 + 1`.']],
+        hints: ['`2^2 + 1`.'] },
+      { show: ['I{0}{2} 6t(t^2 + 1)^2 dd{t}', '= 3 I{1}{5} u^2 dd{u}'] },
+      { lead: 'Evaluate.', ask: '3 I{1}{5} u^2 dd{u} =', num: true, ans: '124', units: 'liters', unitAlts: ['L', 'liter'],
+        wrongs: [['125', 'Subtract the value at the lower limit: `5^3 − 1^3`.'],
+          ['372', 'An antiderivative of `3u^2` is `u^3`. Divide by the new exponent, 3.'],
+          ['248', 'Use the 3 from `6t dd{t} = 3 dd{u}`, not 6.']],
+        hints: ['An antiderivative of `3u^2` is `u^3`. Evaluate it at 5 and at 1, and subtract.'] },
+      { lead: 'Find the net change in the volume, `V(2) − V(0) = I{0}{2} V′(t) dd{t}`.', ask: 'V(2) − V(0) =', num: true, ans: '-124', units: 'liters', unitAlts: ['L', 'liter'],
+        wrongs: [['124', 'That is the oil that leaks out. The volume falls, `V′(t) = −r(t)`, so the net change is negative.']],
+        hints: ['`I{0}{2} V′(t) dd{t} = −I{0}{2} r(t) dd{t}`.'] },
+      { lead: 'Which sentence states what the net change means?', ok: 0, pick: [
+        ['The tank loses 124 liters of oil in the first 2 hours.', 'The negative sign says the volume went down, and its size says by how much.'],
+        ['The tank holds −124 liters at `t = 2`.', 'A volume cannot be negative. `−124` is the change in the volume, not the volume.'],
+        ['Oil leaks at 124 liters per hour.', 'Integrating over hours removes the “per hour”. 124 is an amount of oil, not a rate.']] },
+      { lead: 'How much oil is in the tank at `t = 2`?', ask: 'V(2) =', num: true, ans: '376', units: 'liters', unitAlts: ['L', 'liter'],
+        wrongs: [['624', 'The net change is `−124`, so the volume goes down: `500 + (−124)`.'],
+          [['124', '-124'], 'That is the change. Add it to the 500 liters the tank held at the start.']],
+        hints: ['`V(2) = V(0) + (V(2) − V(0)) = 500 + (−124)`.'] }],
+    graph: { x: [0, 2.2], y: [0, 320], ticks: { x: 0.5, y: 50 }, fns: [{ f: u12m7, domain: [0, 2] }], shade: [{ f: 0, a: 0, b: 2, role: 'outside' }],
+      aria: 'The leak rate r(t) = 6t times (t squared + 1) squared from t = 0 to 2, rising from 0 to 300 liters per hour, with the region under it shaded.' },
+    after: 'The shaded area, 124, is the oil that leaks out. The volume changes by `−124`, from 500 to 376 liters.' },
+
+  /* 16. (twin 12.7) the average value of a function, and the c where f reaches it */
+  { id: 'm8', sec: 'sec-more', task: 'Find the average value of `f` on `[0, 4]`, and the `c` in `[0, 4]` where `f(c)` equals it.', board: 'f(x) = sqrt(x), 0 ≤ x ≤ 4', teach: T_AVG,
+    steps: [
+      { lead: 'First the integral. Write `sqrt(x) = x^(1/2)`.', ask: 'I{0}{4} sqrt(x) dd{x} =', num: true, ans: '16/3',
+        wrongs: [['8', 'Divide by the new exponent: an antiderivative of `x^(1/2)` is `F{x^(3/2)}{3/2} = F{2}{3} x^(3/2)`, so the integral is `F{2}{3} · 8`.'],
+          ['12', 'Dividing by the new exponent `F{3}{2}` is multiplying by `F{2}{3}`, not by `F{3}{2}`.']],
+        hints: ['An antiderivative of `x^(1/2)` is `F{2}{3} x^(3/2)`, and `4^(3/2) = (sqrt(4))^3 = 8`.'] },
+      { lead: 'Divide by the length of the interval.', ask: 'f_(avg) = F{1}{4 − 0} I{0}{4} sqrt(x) dd{x} =', num: true, ans: '4/3', tol: 0.011,
+        wrongs: [['16/3', 'That is the integral. Divide it by the length of the interval, 4.'],
+          ['1', 'That is the average of the two end values, `F{f(0) + f(4)}{2}`. The average value uses the whole interval, through the integral.', ['#ex-p6', 'See Problem 6, the same mistake with a rate']],
+          ['sqrt(2)', 'That is `f(2)`, the value at the middle of the interval. The average value is the integral divided by the length of the interval.']],
+        hints: ['`F{1}{4} · F{16}{3}`.'] },
+      { lead: 'Solve `f(c) = sqrt(c) = F{4}{3}` for `c`.', ask: 'c =', num: true, ans: '16/9', tol: 0.011,
+        wrongs: [['4/3', 'That is `f(c)`, the height. The question asks for the input `c`: square both sides of `sqrt(c) = F{4}{3}`.'],
+          ['2', '`c = 2` is the middle of the interval, but `f(2) = sqrt(2) ≈ 1.414`, not `F{4}{3}`. Square both sides of `sqrt(c) = F{4}{3}`.'],
+          ['sqrt(4/3)', 'To undo a square root, square: `c = (F{4}{3})^2`.']],
+        hints: ['Square both sides: `c = (F{4}{3})^2`.'],
+        why: '`c = F{16}{9} ≈ 1.778` lies in `[0, 4]`, so it is the answer.' }],
+    graph: { x: [0, 4.4], y: [0, 2.4], ticks: { x: 1, y: 0.5 }, fns: [{ f: Math.sqrt, domain: [0, 4.4] }], shade: [{ f: 0, a: 0, b: 4, role: 'outside' }],
+      hlines: [{ y: 4 / 3, role: 'muted' }], dots: [{ x: 16 / 9, y: 4 / 3, label: '(16/9, 4/3)', at: 'nw' }],
+      aria: 'The graph of the square root of x from 0 to 4, with the region under it shaded. A dashed horizontal line at height 4/3 marks the average value and meets the curve at the point (16/9, 4/3).' },
+    after: 'The dashed line is the average value, `F{4}{3}`. It meets the curve at `c = F{16}{9}`. A rectangle `F{4}{3}` tall on `[0, 4]` has the same area, `F{16}{3}`, as the shaded region.' },
+
+  /* 17. (twin 12.9) a doubling time, then the time to triple */
+  { id: 'm9', sec: 'sec-more', task: 'A bacteria culture grows at a rate proportional to its size, and it doubles every 5 hours. How long does it take to triple?', board: ['D{y}{t} = ky', '"doubling time" = 5 "hours"'], v: 't', teach: T_GROW,
+    steps: [
+      { lead: 'Which formula gives the size `y` after `t` hours, starting from `y_0`?', ok: 0, pick: [
+        ['`y = y_0 e^(kt)`, with `k > 0`', 'The solution of `D{y}{t} = ky` is `y = y_0 e^(kt)`, and `k` is positive because the culture grows.'],
+        ['`y = y_0 e^(kt)`, with `k < 0`', 'With `k < 0` the culture would shrink. A growing amount needs `k > 0`.'],
+        ['`y = y_0 + kt`', 'That adds the same number of bacteria every hour. Here the rate is proportional to the size, so the size grows by the same factor every hour.']] },
+      { lead: 'After 5 hours the culture has doubled: `2y_0 = y_0 e^(5k)`, so `2 = e^(5k)`. Take the natural log of both sides and solve for `k`.', ask: 'k =', num: true, ans: 'ln(2)/5', tol: 0.0006,
+        wrongs: [['-ln(2)/5', '`ln 2` is positive, so `k` is positive, as it must be for growth.'],
+          ['ln(2)', 'Divide by 5: `5k = ln 2`.'],
+          ['5ln(2)', 'Divide both sides of `5k = ln 2` by 5 instead of multiplying.'],
+          ['2/5', 'Take the natural log of both sides first: `ln 2 = 5k`. Dividing 2 by 5 skips the log.'],
+          ['0.1', 'Your method is right, but that value is rounded too far. `k = F{ln 2}{5} ≈ 0.1386`. Keep three decimal places, or type the exact value ⟦ln(2)/5⟧.']],
+        hints: ['`ln(e^(5k)) = 5k`, so `ln 2 = 5k`.'],
+        why: '`k = F{ln 2}{5} ≈ 0.1386` per hour.' },
+      { lead: 'The culture triples when `3y_0 = y_0 e^(kt)`. Solve for `t`.', ask: 't =', num: true, ans: '5ln(3)/ln(2)', tol: 0.06, units: 'hours', unitAlts: ['h', 'hr', 'hrs'],
+        wrongs: [['7.5', 'Growth multiplies, so tripling is not one and a half doublings. Divide `y_0` out, take the natural log, `ln 3 = kt`, then divide by `k`.'],
+          ['15', 'That is three doubling times, which multiplies the size by `2^3 = 8`. Solve `3 = e^(kt)` instead.'],
+          ['5ln(2)/ln(3)', 'That is upside down. From `ln 3 = kt`, `t = F{ln 3}{k} = F{5 ln 3}{ln 2}`.'],
+          ['ln(3)ln(2)/5', 'Divide `ln 3` by `k`; that multiplied by it.'],
+          [['7.84', '7.85', '7.8'], 'That comes from rounding `k` to 0.14. Use `k ≈ 0.1386`, or the exact value `F{ln 2}{5}`.']],
+        hints: ['Divide both sides by `y_0`: `3 = e^(kt)`. Then take the natural log: `ln 3 = kt`.'],
+        why: 'The exact value is `t = F{ln 3}{k} = F{5 ln 3}{ln 2} ≈ 7.92` hours.' },
+      { lead: 'Does about 7.92 hours make sense?', ok: 0, pick: [
+        ['Yes: it is between 5 hours, when the culture has doubled, and 10 hours, when it has grown to 4 times its size', 'Tripling falls between doubling and quadrupling, so its time falls between theirs.'],
+        ['No: tripling should take one and a half doubling times, 7.5 hours', 'One and a half doubling times multiply the size by `2^1.5 ≈ 2.83`, not 3. Growth multiplies, so times do not scale this way.'],
+        ['No: tripling should take three times as long as doubling, 15 hours', '15 hours is three doubling times, which multiplies the size by `2^3 = 8`.']] }],
+    graph: { x: [0, 12], y: [0, 6], ticks: { x: 2, y: 1 }, fns: [{ f: u12m9, domain: [0, 12] }], hlines: [{ y: 3, role: 'muted' }],
+      dots: [{ x: 5, y: 2, label: '(5, 2)', at: 'se' }, { x: 5 * Math.log(3) / Math.log(2), y: 3, label: '(7.92, 3)', at: 'nw' }, { x: 10, y: 4, label: '(10, 4)', at: 'se' }],
+      aria: 'The size of the culture as a multiple of its starting size, from t = 0 to 12 hours, rising from 1 and curving upward. Points mark 2 times at 5 hours, 3 times at about 7.92 hours, and 4 times at 10 hours, with a dashed horizontal line at 3.' },
+    after: 'The size, as a multiple of the starting size: 2 at 5 hours, 3 at about 7.92 hours, 4 at 10 hours.' }
 ];
 
 /* ================================ builder (the Unit 3 builder; `pre` and power slips added) ================================ */
@@ -3227,7 +3517,7 @@ function backHTML() {
 function page() {
   return header('Unit 12 Practice', SECTIONS_P.map(function (s) { return ['#' + s.id, s.nav]; }).concat([['#sec-back', 'Next']])) +
     '<main id="top">' + hero({ kicker: 'Calculus I · Unit 12: Substitution and Net Change', title: 'Unit 12 Practice',
-      dek: 'Use this page after you read Unit 12: Substitution and Net Change and Unit 12 Worked Examples. For each problem, choose the method, then type each line of the work. Each line is checked before the next one opens. Type a power with ⟦^⟧, as in ⟦x^2⟧ or ⟦x^(3/2)⟧, and put a whole top or bottom in parentheses, as in ⟦(x + 1)/(x − 2)⟧.' }) +
+      dek: 'Use this page after you read Unit 12: Substitution and Net Change and Unit 12 Worked Examples. For each problem, choose the method, then type each line of the work. Each line is checked before the next one opens. Problems 9 to 17, under More Practice, are optional. Type a power with ⟦^⟧, as in ⟦x^2⟧ or ⟦x^(3/2)⟧, and put a whole top or bottom in parentheses, as in ⟦(x + 1)/(x − 2)⟧.' }) +
     SECTIONS_P.map(sectionHTML).join('') + backHTML() + '</main>';
 }
 expose({ PROBLEMS: PROBLEMS, problemHTML: problemHTML, formProblem: formProblem, stepDone: stepDone });
